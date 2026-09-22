@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flores Amarillas 💛</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           COLORES GENERALES
+        ========================== */
+
+        :root {
+            --crema: #fffaf0;
+            --crema2: #fff5d8;
+
+            --amarillo: #f4cb5c;
+            --amarillo-claro: #ffe59b;
+
+            --marron: #675545;
+            --marron-claro: #897360;
+
+            --verde: #85956b;
+            --verde-claro: #9eaa82;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: "Montserrat", sans-serif;
+
+            color: var(--marron);
+
+            background:
+
+                radial-gradient(
+                    circle at 85% 10%,
+                    rgba(255, 220, 120, 0.35),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(255, 231, 169, 0.35),
+                    transparent 30%
+                ),
+
+                var(--crema);
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           CONTENEDOR
+        ========================== */
+
+        .pagina {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 45px 20px;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           TARJETA
+        ========================== */
+
+        .tarjeta {
+
+            width: min(1100px, 95%);
+
+            min-height: 620px;
+
+            background: rgba(255, 253, 247, 0.92);
+
+            border-radius: 32px;
+
+            border: 1px solid rgba(213, 174, 81, 0.25);
+
+            box-shadow:
+                0 20px 60px rgba(91, 72, 45, 0.12);
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr
+                0.95fr;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           LADO IZQUIERDO
+        ========================== */
+
+        .texto {
+
+            padding: 75px 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        .fecha {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 12px;
+
+            letter-spacing: 2.5px;
+
+            text-transform: uppercase;
+
+            color: #9b7c40;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+
+        .fecha::before {
+
+            content: "";
+
+            width: 36px;
+
+            height: 1px;
+
+            background: #caa451;
+        }
+
+
+        h1 {
+
+            font-family: "DM Serif Display", serif;
+
+            font-weight: normal;
+
+            font-size: clamp(48px, 6vw, 78px);
+
+            line-height: 0.98;
+
+            margin-bottom: 26px;
+
+            color: #675442;
+        }
+
+
+        h1 span {
+
+            color: #d5a73e;
+        }
+
+
+        .descripcion {
+
+            max-width: 570px;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+
+            color: #796858;
+
+            margin-bottom: 27px;
+        }
+
+
+        .frase {
+
+            font-family: "DM Serif Display", serif;
+
+            font-size: 19px;
+
+            line-height: 1.5;
+
+            border-left: 3px solid var(--amarillo);
+
+            padding: 5px 0 5px 18px;
+
+            margin-bottom: 30px;
+
+            color: #745f49;
+        }
+
+
+        /* =========================
+           BOTÓN
+        ========================== */
+
+        button {
+
+            width: fit-content;
+
+            border: none;
+
+            background: #f1cf73;
+
+            color: #64523e;
+
+            font-family: "Montserrat", sans-serif;
+
+            font-weight: 600;
+
+            padding: 14px 24px;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+
+                0 8px 18px
+                rgba(208, 164, 60, 0.18);
+        }
+
+
+        button:hover {
+
+            transform: translateY(-3px);
+
+            background: #e9c15c;
+        }
+
+
+        /* =========================
+           MENSAJE OCULTO
+        ========================== */
+
+        .mensaje {
+
+            max-height: 0;
+
+            overflow: hidden;
+
+            opacity: 0;
+
+            margin-top: 0;
+
+            transition: all 0.5s ease;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+
+            color: #796657;
+
+            max-width: 500px;
+        }
+
+
+        .mensaje.activo {
+
+            max-height: 150px;
+
+            opacity: 1;
+
+            margin-top: 22px;
+        }
+
+
+
+        /* =========================
+           ZONA DE FLORES
+        ========================== */
+
+        .zona-flores {
+
+            position: relative;
+
+            min-height: 620px;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    160deg,
+                    rgba(255, 229, 153, 0.5),
+                    rgba(255, 250, 240, 0.1)
+                );
+        }
+
+
+        /* círculo amarillo de fondo */
+
+        .circulo {
+
+            position: absolute;
+
+            width: 320px;
+
+            height: 320px;
+
+            border-radius: 50%;
+
+            right: -20px;
+
+            top: -35px;
+
+            background:
+                rgba(255, 216, 105, 0.23);
+        }
+
+
+
+        /* =========================
+           RAMO
+        ========================== */
+
+        .ramo {
+
+            position: absolute;
+
+            width: 470px;
+
+            height: 480px;
+
+            left: 50%;
+
+            bottom: 30px;
+
+            transform: translateX(-50%);
+        }
+
+
+
+        /* =========================
+           CADA FLOR COMPLETA
+        ========================== */
+
+        .flor-completa {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            width: 90px;
+
+            height: 390px;
+
+            transform-origin: bottom center;
+        }
+
+
+
+        /* Posición de cada flor */
+
+        .flor1 {
+            left: 15px;
+            height: 300px;
+            transform: rotate(-8deg);
+        }
+
+        .flor2 {
+            left: 80px;
+            height: 365px;
+            transform: rotate(-3deg);
+        }
+
+        .flor3 {
+            left: 150px;
+            height: 320px;
+            transform: rotate(0deg);
+        }
+
+        .flor4 {
+            left: 220px;
+            height: 405px;
+            transform: rotate(2deg);
+        }
+
+        .flor5 {
+            left: 290px;
+            height: 325px;
+            transform: rotate(3deg);
+        }
+
+        .flor6 {
+            left: 355px;
+            height: 360px;
+            transform: rotate(5deg);
+        }
+
+        .flor7 {
+            left: 410px;
+            height: 290px;
+            transform: rotate(8deg);
+        }
+
+
+
+        /* =========================
+           TALLO
+        ========================== */
+
+        .tallo {
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 4px;
+
+            height: calc(100% - 65px);
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #84946b,
+                    #70815a
+                );
+
+            border-radius: 20px;
+        }
+
+
+
+        /* =========================
+           CABEZA FLOR
+        ========================== */
+
+        .flor {
+
+            width: 86px;
+
+            height: 86px;
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 0;
+
+            transform: translateX(-50%);
+
+            animation:
+                movimientoFlor
+                4s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+
+        /* pétalos */
+
+        .petalo {
+
+            position: absolute;
+
+            width: 33px;
+
+            height: 47px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #f8d66e,
+                    #f1c14a
+                );
+
+            border-radius:
+
+                70%
+                40%
+                70%
+                40%;
+
+            left: 27px;
+
+            top: 8px;
+
+            transform-origin:
+                16px
+                35px;
+        }
+
+
+        .petalo:nth-child(1) {
+            transform: rotate(0deg) translateY(-13px);
+        }
+
+        .petalo:nth-child(2) {
+            transform: rotate(72deg) translateY(-13px);
+        }
+
+        .petalo:nth-child(3) {
+            transform: rotate(144deg) translateY(-13px);
+        }
+
+        .petalo:nth-child(4) {
+            transform: rotate(216deg) translateY(-13px);
+        }
+
+        .petalo:nth-child(5) {
+            transform: rotate(288deg) translateY(-13px);
+        }
+
+
+
+        /* centro */
+
+        .centro {
+
+            position: absolute;
+
+            width: 26px;
+
+            height: 26px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #c59635,
+                    #9e7226
+                );
+
+            border-radius: 50%;
+
+            left: 30px;
+
+            top: 30px;
+
+            z-index: 5;
+        }
+
+
+
+        /* =========================
+           HOJAS
+        ========================== */
+
+        .hoja {
+
+            position: absolute;
+
+            width: 34px;
+
+            height: 68px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--verde-claro),
+                    var(--verde)
+                );
+
+            border-radius:
+                100% 0
+                100% 0;
+
+            opacity: 0.9;
+        }
+
+
+        .hoja.izquierda {
+
+            bottom: 115px;
+
+            left: 6px;
+
+            transform: rotate(-48deg);
+        }
+
+
+        .hoja.derecha {
+
+            bottom: 145px;
+
+            right: 4px;
+
+            transform:
+                scaleX(-1)
+                rotate(-48deg);
+        }
+
+
+
+        /* =========================
+           SNOOPY
+        ========================== */
+
+        .snoopy {
+
+            position: absolute;
+
+            right: 25px;
+
+            bottom: 18px;
+
+            width: 120px;
+
+            z-index: 10;
+
+            text-align: center;
+        }
+
+
+        .snoopy img {
+
+            width: 100%;
+
+            max-height: 135px;
+
+            object-fit: contain;
+
+            filter:
+
+                drop-shadow(
+                    0 8px 8px
+                    rgba(80, 60, 40, 0.13)
+                );
+        }
+
+
+        .snoopy p {
+
+            margin-top: 5px;
+
+            font-size: 10px;
+
+            color: #967d60;
+        }
+
+
+
+        /* =========================
+           PÉTALOS QUE CAEN
+        ========================== */
+
+        .petalo-caida {
+
+            position: fixed;
+
+            top: -30px;
+
+            width: 12px;
+
+            height: 20px;
+
+            background: #f4cb5c;
+
+            border-radius:
+
+                80%
+                30%
+                80%
+                30%;
+
+            opacity: 0.7;
+
+            pointer-events: none;
+
+            z-index: 100;
+
+            animation:
+                caer linear forwards;
+        }
+
+
+
+        /* =========================
+           ANIMACIONES
+        ========================== */
+
+        @keyframes movimientoFlor {
+
+            from {
+
+                transform:
+                    translateX(-50%)
+                    rotate(-1.5deg);
+            }
+
+            to {
+
+                transform:
+                    translateX(-50%)
+                    rotate(1.5deg);
+            }
+        }
+
+
+
+        @keyframes caer {
+
+            0% {
+
+                transform:
+                    translateY(-20px)
+                    rotate(0deg);
+            }
+
+            100% {
+
+                transform:
+                    translateY(110vh)
+                    rotate(500deg);
+
+                opacity: 0;
+            }
+        }
+
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media(max-width: 850px) {
+
+            .tarjeta {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .texto {
+
+                padding:
+
+                    55px
+                    35px
+                    35px;
+            }
+
+
+            .zona-flores {
+
+                min-height: 510px;
+            }
+
+
+            .ramo {
+
+                transform:
+                    translateX(-50%)
+                    scale(0.88);
+
+                transform-origin:
+                    bottom center;
+            }
+        }
+
+
+
+        @media(max-width: 500px) {
+
+            .pagina {
+
+                padding: 20px 10px;
+            }
+
+
+            .tarjeta {
+
+                width: 100%;
+
+                border-radius: 25px;
+            }
+
+
+            .texto {
+
+                padding:
+
+                    45px
+                    24px
+                    30px;
+            }
+
+
+            h1 {
+
+                font-size: 48px;
+            }
+
+
+            .zona-flores {
+
+                min-height: 450px;
+            }
+
+
+            .ramo {
+
+                left: 48%;
+
+                transform:
+
+                    translateX(-50%)
+                    scale(0.72);
+            }
+
+
+            .snoopy {
+
+                width: 95px;
+
+                right: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+
+
+<div class="pagina">
+
+
+    <div class="tarjeta">
+
+
+        <!-- =========================
+             PARTE IZQUIERDA
+        ========================== -->
+
+        <div class="texto">
+
+
+            <div class="fecha">
+
+                21 de septiembre
+
+            </div>
+
+
+
+            <h1>
+
+                Para ti
+
+                <br>
+
+                <span>
+                    tus flores amarillas
+                </span>
+
+            </h1>
+
+
+
+            <p class="descripcion">
+
+                Porque se qu te gustan muchas estas cosas y no se si te dare tus florcitas
+                te hice esta pagina para ti aunque no salga como me gusten ok?
+
+                Pero queria darte un pequeñiñito detalle hecho
+                por mi solita aunque con ayuda de un robotcito pero solo las flores ok?
+                por que aun no llego al paso de hacer figuras 😞, pero igual espero que te guste, tamo 🌼💛
+                (Psdt: No encontre una flor amarilla en google😞) Tamo
+
+            </p>
+
+
+
+            <div class="frase">
+
+                “Siempre quiero verte feliz sin importar que te amo muchisimo
+                y espero que te haya gustado tus florcitas.
+            </div>
+
+
+
+            <button onclick="mostrarMensaje()">
+
+                Abre abre abre abre ✨
+
+            </button>
+
+
+
+            <p
+                class="mensaje"
+                id="mensaje"
+            >
+
+                Si pudiera darte una flor por cada momento
+                bonito a tu lado peude ser que necesitaria
+                un jardin muy grande 🌼💛
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             PARTE DERECHA
+        ========================== -->
+
+        <div class="zona-flores">
+
+
+            <div class="circulo"></div>
+
+
+
+            <div class="ramo">
+
+
+                <!-- FLOR 1 -->
+
+                <div class="flor-completa flor1">
+
+                    <div class="tallo"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 2 -->
+
+                <div class="flor-completa flor2">
+
+                    <div class="tallo"></div>
+
+                    <div class="hoja izquierda"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 3 -->
+
+                <div class="flor-completa flor3">
+
+                    <div class="tallo"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 4 -->
+
+                <div class="flor-completa flor4">
+
+                    <div class="tallo"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 5 -->
+
+                <div class="flor-completa flor5">
+
+                    <div class="tallo"></div>
+
+                    <div class="hoja derecha"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 6 -->
+
+                <div class="flor-completa flor6">
+
+                    <div class="tallo"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FLOR 7 -->
+
+                <div class="flor-completa flor7">
+
+                    <div class="tallo"></div>
+
+                    <div class="flor">
+
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+                        <span class="petalo"></span>
+
+                        <span class="centro"></span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 SNOOPY
+            ========================== -->
+
+            <div class="snoopy">
+
+                <img
+                    src="https://i.pinimg.com/236x/9a/fe/c6/9afec6c65e2622a207324ec7d9f49263.jpg"
+                    alt="Snoopy"
+                >
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+    function mostrarMensaje() {
+
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+
+        mensaje.classList.toggle("activo");
+
+
+        if (
+            mensaje.classList.contains("activo")
+        ) {
+
+            lanzarPetalos();
+
+        }
+
+    }
+
+
+
+    function lanzarPetalos() {
+
+
+        for (
+            let i = 0;
+            i < 25;
+            i++
+        ) {
+
+
+            const petalo =
+                document.createElement("div");
+
+
+            petalo.classList.add(
+                "petalo-caida"
+            );
+
+
+            petalo.style.left =
+                Math.random() * 100 + "vw";
+
+
+            petalo.style.animationDuration =
+                4 +
+                Math.random() * 4 +
+                "s";
+
+
+            petalo.style.animationDelay =
+                Math.random() * 1 +
+                "s";
+
+
+            document.body.appendChild(
+                petalo
+            );
+
+
+            setTimeout(
+                () => {
+
+                    petalo.remove();
+
+                },
+
+                9000
+            );
+
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
